@@ -108,6 +108,10 @@ class HTTPSTest(TestCase):
         response = self.client.get("/swagger/",
                                    **{'wsgi.url_scheme': 'https'})
         content = response.content.decode()
+        self.assertIn("base.js", content)
+        response = self.client.get("/swagger/base.js",
+                                   **{'wsgi.url_scheme': 'https'})
+        content = response.content.decode()
         self.assertIn("url: 'https", content)
 
     def test_api_docs(self):
